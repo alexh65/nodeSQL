@@ -21,6 +21,7 @@ db.connect((err) => {
   }
   console.log('MySQL connected....')
 });
+const port = process.env.PORT || 3000;
 const app = express();
 // Parsing body
 app.use(express.json());
@@ -84,7 +85,7 @@ app.post('/editRectangle', (req, res) => {
     res.redirect('/');
   });
 });
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log("Server started on port 3000");
 });
 
