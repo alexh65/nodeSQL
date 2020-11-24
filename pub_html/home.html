@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script type='text/javascript' src="script.js"></script>
+  <title>Rectangles</title>
+</head>
+<body onload="main()">
+  <h1>Rectangle</h1>
+  <p>&#x2012;&#x2012; Add your own rectangle! &#x2012;&#x2012;</p>
+  <form action="/addRectangle" method="POST" id="rec_form">
+    <ul>
+      <li>
+        <label for="width">Width</label>
+        <input type="number" id="width" name="width" min="1" value="1" required>
+      </li>
+      <li>
+        <label for="height">Height</label>
+        <input type="number" name="height" id="height" min="1" value="1" required>
+      </li>
+      <li>
+        <label for="color">Colour</label>
+        <input type="color" name="color" id="color" value="#000000">
+      </li>
+      <li class="button">
+        <button type="submit">Add</button>
+      </li>
+    </ul>
+  </form>
+  <main>
+  </main>
+</body>
+</html>
