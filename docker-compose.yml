@@ -1,0 +1,39 @@
+version: "3.2"
+services: 
+  nodejs:
+    build:
+      context: .
+    image: lexotterly/nodesql
+    depends_on: 
+      - mysql
+    networks: 
+      - frontend
+      - backend
+    environment: 
+      - MYSQL_HOST=cmpt470-mysql-app
+      - MYSQL_USER=alexh
+      - MYSQL_PASS=alexh
+      - MYSQL_DB=cmpt470
+    volumes:
+      - ./www/:/var/www/html/
+    ports:
+      - "30001:3000"
+    container_name: cmpt470-nodejs-app
+  mysql:
+    image: mysql:5.7
+    networks: 
+      - backend
+    ports:
+      - "3306:3306"
+    environment: 
+      - MYSQL_ROOT_PASSWORD=root 
+      - MYSQL_USER=alexh 
+      - MYSQL_PASSWORD=alexh
+      - MYSQL_DATABASE=cmpt470
+    container_name: cmpt470-mysql-app
+networks: 
+  frontend:
+  backend:
+
+
+    

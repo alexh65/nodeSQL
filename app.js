@@ -1,12 +1,25 @@
 const express = require('express');
 const mysql = require('mysql');
+
+let mysqlHost = process.env.MYSQL_HOST || 'localhost';
+let mysqlPort = process.env.MYSQL_PORT || '3306';
+let mysqlUser = process.env.MYSQL_USER || 'root';
+let mysqlPass = process.env.MYSQL_PASS || 'root';
+let mysqlDB = process.env.MYSQL_DB || 'cmpt470';
+
+let connectionOptions = {
+  host: mysqlHost,
+  port: mysqlPort,
+  user: mysqlUser,
+  password: mysqlPass,
+  database: mysqlDB
+};
+
+// console.log('MySQL Connection config: '); 
+// console.log(connectionOptions);
+
 // Create connection
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'cmpt470'
-});
+const db = mysql.createConnection(connectionOptions);
 
 let options = {
   dotfiles: 'ignore',
@@ -21,8 +34,13 @@ db.connect((err) => {
   }
   console.log('MySQL connected....')
 });
+
+
+
+
 const port = process.env.PORT || 3000;
 const app = express();
+
 // Parsing body
 app.use(express.json());
 app.use(express.urlencoded({
@@ -34,6 +52,8 @@ app.use('/', (req, res, next) => {
   console.log(req.method, 'request:', req.url, JSON.stringify(req.body));
   next();
 });
+
+
 // Post will automatically add next()
 app.post('/addRectangle', (req, res) => {
   let rec = req.body;
